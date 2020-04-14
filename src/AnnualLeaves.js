@@ -7,7 +7,7 @@ import { Column } from 'primereact/column';
 import { apiBaseUrl, currentYear } from './Constants';
 import { Calendar } from 'primereact/calendar';
 import { Growl } from 'primereact/growl';
-import { getYear, toDate, toMySQLDate } from './Date';
+import {getYear, isBankHoliday, toDate, toMySQLDate} from './Date';
 import { Dropdown } from 'primereact/dropdown';
 import { Dialog } from 'primereact/dialog';
 import { ProgressBar } from 'primereact/progressbar';
@@ -328,6 +328,17 @@ class AnnualLeaves extends Component {
             </div>
         );
 
+        const bankHolidayTemplate = (date) => {
+            if (isBankHoliday(date.day, date.month, date.year)) {
+                return (
+                    <div style={{backgroundColor: '#F7362D', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0}}>{date.day}</div>
+                );
+            }
+            else {
+                return date.day;
+            }
+        };
+
         return (
             <div className='content-section'>
                 <Growl ref={el => (this.growl = el)} />
@@ -406,6 +417,7 @@ class AnnualLeaves extends Component {
                                     value={toDate(this.state.leave.from)}
                                     onChange={e => this.updateProperty('from', toMySQLDate(e.value))}
                                     dateFormat='dd-mm-yy'
+                                    dateTemplate={bankHolidayTemplate}
                                 />
                             </div>
 
@@ -419,6 +431,7 @@ class AnnualLeaves extends Component {
                                     value={toDate(this.state.leave.until)}
                                     onChange={e => this.updateProperty('until', toMySQLDate(e.value))}
                                     dateFormat='dd-mm-yy'
+                                    dateTemplate={bankHolidayTemplate}
                                 />
                             </div>
                         </div>

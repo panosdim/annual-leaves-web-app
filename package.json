@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "primeflex": "^1.0.0-rc.1",
+    "primeflex": "^1.0.0",
     "primeicons": "^1.0.0",
-    "primereact": "^3.1.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "primereact": "^3.4.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.0.1",
-    "react-transition-group": "^4.1.0"
+    "react-transition-group": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
